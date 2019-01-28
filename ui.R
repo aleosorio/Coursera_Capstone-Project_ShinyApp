@@ -19,9 +19,9 @@ shinyUI(fluidPage(
                    width = "100%")
     ),
     
-    # Show a plot of the generated distribution
+    # Show text with the predicted word
     mainPanel(
-       textOutput("distPlot")
+       textOutput("distPlot")  ## continue from here!!
     )
   )
 ))
