@@ -1,10 +1,5 @@
 #
-# This is the user-interface definition of a Shiny web application. You can
-# run the application by clicking 'Run App' above.
-#
-# Find out more about building applications with Shiny here:
-# 
-#    http://shiny.rstudio.com/
+# This is the user-interface definition of the Capstone Project App.
 #
 
 library(shiny)
@@ -13,21 +8,20 @@ library(shiny)
 shinyUI(fluidPage(
   
   # Application title
-  titlePanel("Old Faithful Geyser Data"),
+  titlePanel("Predictive Text App"),
   
-  # Sidebar with a slider input for number of bins 
+  # Side bar with a text input for string to predict with 
   sidebarLayout(
     sidebarPanel(
-       sliderInput("bins",
-                   "Number of bins:",
-                   min = 1,
-                   max = 50,
-                   value = 30)
+       textInput(inputId = "string",
+                   label = "Write down the text with which to predict the next word:",
+                   value = "",
+                   width = "100%")
     ),
     
     # Show a plot of the generated distribution
     mainPanel(
-       plotOutput("distPlot")
+       textOutput("distPlot")
     )
   )
 ))
