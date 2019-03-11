@@ -19,9 +19,9 @@ shinyUI(fluidPage(
                    width = "100%")
     ),
     
-    # Show text with the predicted word
+    # Text output containing predicted word, from server.R
     mainPanel(
-       textOutput("distPlot")  ## continue from here!!
+       textOutput(outputId = "wordpred")  ## continue from here!!
     )
   )
 ))
