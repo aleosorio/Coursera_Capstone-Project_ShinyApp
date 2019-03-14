@@ -7,11 +7,36 @@ library(tidyverse)
 library(stringr)
 set.seed(123)
 
-## stringsurefinal: if unsuccessful on its first try, it conducts the next search
-## after an n-gram reduction, whithin the pre-calculated n-grams dataset
-## (ngramdata = wordpredgrams).  If still unsuccessful, it applies the original
-## stringsure's search criteria within a sample of testdata, and so on.
 
+## stringrow: function that extracts specified string, plus its next word, from
+## a row
+
+stringrow <- function(string, dataset, numrow) {
+        matches <- str_extract_all(dataset[numrow], paste("(?<=(^|\\s))", string, "\\s\\w+", sep = ""))[[1]]
+        return(matches)
+}
+
+## stringset: function that nests previous function and applies it to a dataset
+
+stringset <- function(string, dataset) {
+        datlength <- length(dataset)
+        matches <- c()
+        for(i in 1:datlength) {
+                stringmatch <- stringrow(string, dataset, numrow = i)
+                matches <- c(matches, stringmatch)
+        }
+        matches <- data_frame(string = matches) %>%
+                mutate(., freq = 1) %>%
+                group_by(string) %>%
+                summarize (., freq = sum(freq)) %>%
+                arrange(., desc(freq))
+        return(matches)
+}
+
+## stringsurefinal: function that nests previous function and applies it to a if unsuccessful on its first try, it conducts the next search
+## after an 1-gram reduction of the input string, whithin the pre-calculated n-grams dataset
+## (ngramdata).  If still unsuccessful, it applies the original
+## stringsure's search criteria within a sample of testdata, and so on.
 
 stringsurefinal <- function(string, ngramdata, stringdata) {
         strlength <- str_count(string, boundary("word"))
