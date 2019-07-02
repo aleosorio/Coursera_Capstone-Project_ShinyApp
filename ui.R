@@ -1,5 +1,5 @@
 #
-# This is the user-interface definition of the Capstone Project App.
+# User-interface definition of the Capstone Project App.
 #
 
 library(shiny)

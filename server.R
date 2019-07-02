@@ -1,5 +1,5 @@
 #
-# This is the server logic of of the Capstone Project App.
+# Server logic of of the Capstone Project App.
 #
 
 library(shiny)
